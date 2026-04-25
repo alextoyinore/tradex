@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+pydantic
+websockets
+pandas
+pandas-ta
