@@ -11,7 +11,8 @@ const Markets = () => {
   useEffect(() => {
     let ws;
     try {
-      ws = new WebSocket('ws://localhost:8000/ws/stream');
+      const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      ws = new WebSocket(`${wsProtocol}//${window.location.host}/ws/stream`);
       
       ws.onopen = () => {
         setConnected(true);

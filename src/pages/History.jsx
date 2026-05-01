@@ -11,7 +11,7 @@ const History = () => {
   const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/trades')
+    fetch('/api/trades')
       .then(res => res.json())
       .then(data => {
         setTrades(data);

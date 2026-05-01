@@ -99,13 +99,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Fetch initial agents
-    fetch('http://localhost:8000/api/agents')
+    fetch('/api/agents')
       .then(res => res.json())
       .then(data => setAgents(data))
       .catch(console.error);
 
     // Fetch initial signals (last 10 trades)
-    fetch('http://localhost:8000/api/trades')
+    fetch('/api/trades')
       .then(res => res.json())
       .then(data => {
         // Map Trade objects to Signal format if needed, 
@@ -121,7 +121,8 @@ const Dashboard = () => {
       .catch(console.error);
 
     // WebSocket for live signals
-    const ws = new WebSocket('ws://localhost:8000/ws/stream');
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const ws = new WebSocket(`${wsProtocol}//${window.location.host}/ws/stream`);
     ws.onmessage = (event) => {
       try {
         const message = JSON.parse(event.data);
@@ -295,7 +296,7 @@ const Dashboard = () => {
           onCreated={() => {
             setIsModalOpen(false);
             // Refresh agents count
-            fetch('http://localhost:8000/api/agents')
+            fetch('/api/agents')
               .then(res => res.json())
               .then(data => setAgents(data))
               .catch(console.error);

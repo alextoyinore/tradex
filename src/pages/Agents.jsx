@@ -64,7 +64,7 @@ const Agents = () => {
 
   const fetchAgents = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/agents');
+      const res = await fetch('/api/agents');
       if (res.ok) {
         const data = await res.json();
         setAgents(data);
@@ -82,7 +82,7 @@ const Agents = () => {
 
   const handleToggle = async (agentId) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/agents/${agentId}/toggle`, {
+      const res = await fetch(`/api/agents/${agentId}/toggle`, {
         method: 'POST'
       });
       if (res.ok) {
